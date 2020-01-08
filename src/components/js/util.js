@@ -2,17 +2,16 @@ import axios from 'axios'
 
 export default{
 /* eslint-disable */
-  test: function (info) {
-    var id = (window.parent.location.href.split('=')[1])
+  getUserIfo: function (info) {
     axios.get('/api/user/info',
       {
         params: {
-          id: id
+          id: -1
         }
       })
       .then(result => {
-        if (result.data.code !== 200) {
-          let data = result.data
+        if (result.data.code === 200) {
+          let data = result.data.data
           info.name = data.name
           if(data.phone !== '') {
             info.phone = data.phone
@@ -26,7 +25,7 @@ export default{
           info.balance = data.balance
 
         } else {
-          callback()
+          alert(result.data.message)
         }
       })
   }

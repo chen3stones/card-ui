@@ -121,8 +121,7 @@ export default {
             .then(result => {
               if (result.data.code === 200 || result.data.code === 5007) {
                 this.$router.push({
-                  path: '/user/info',
-                  query: { id: result.data.data}
+                  path: '/user/info'
                 })
               } else {
                 this.$message.error(result.data.message)

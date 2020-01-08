@@ -1,5 +1,5 @@
 <template>
-  <div id="user" class="UserList">
+  <div>
     <el-table :data="tableData" stripe>
       <el-table-column label="ID" prop="id" width="50"></el-table-column>
       <el-table-column label="姓名" prop="name" width="100"></el-table-column>
@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     getUserList: function () {
-      axios.get('api/user/list')
+      axios.get('/api/user/list')
         .then(response => {
           if (response.data.code === 200) {
             this.tableData = response.data.data

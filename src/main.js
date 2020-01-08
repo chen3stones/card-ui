@@ -7,17 +7,11 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueAxios from 'vue-axios'
 import axios from 'axios'
-import UserIndex from './components/userIndex/UserIndex'
-
-import UserList from './components/UserList'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(VueAxios, axios)
 
-Vue.component('userList', UserList)
-Vue.use(UserList)
-Vue.component('user-menu', UserIndex)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
