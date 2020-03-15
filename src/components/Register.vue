@@ -65,7 +65,7 @@
             </el-col>
             <el-col>
               <el-form-item>
-                <el-button type="primary" @click="mailSubmit('mailRegister')">立即注册</el-button>
+                <el-button type="primary" @click="mailSubmit('mailRegister')">添加用户</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -177,7 +177,8 @@ export default {
         sex: '',
         birthday: '',
         password: '',
-        re_password: ''
+        re_password: '',
+        createBy: 0
       },
       mailRules: {
         mail: [
@@ -220,8 +221,8 @@ export default {
             .then(result => {
               if (result.data.code === 200) {
                 this.$notify({
-                  title: '注册成功',
-                  message: h('i', { style: 'color: teal'}, '请到您的邮箱进行验证')
+                  title: '添加用户成功',
+                  message: h('i', { style: 'color: teal'}, '用户添加成功，密码为邮箱账号')
                 });
               } else {
                 this.$message.error(result.data.message)

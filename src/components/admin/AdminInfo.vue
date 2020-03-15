@@ -4,15 +4,15 @@
       <el-col :span="8" offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">姓名</div>
-          <div class="div-small" v-if="flag">{{info.name}}</div>
-          <el-input v-model="info.name" :placeholder="info.name" v-if="!flag"></el-input>
+          <div class="div-small" v-if="changeFlag">{{info.name}}</div>
+          <el-input v-model="info.name" :placeholder="info.name" v-if="!changeFlag"></el-input>
         </div>
       </el-col>
       <el-col :span="8" offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">性别</div>
-          <div class="div-small" v-if="flag">{{info.sex}}</div>
-          <el-select placeholder="性别" v-model="info.sex" v-if="!flag">
+          <div class="div-small" v-if="changeFlag">{{info.sex}}</div>
+          <el-select placeholder="性别" v-model="info.sex" v-if="!changeFlag">
             <el-option label="男" value="0"></el-option>
             <el-option label="女" value="1"></el-option>
           </el-select>
@@ -23,13 +23,13 @@
       <el-col :span="8" offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">手机</div>
-          <div class="div-small" v-if="flag">{{info.phone}}</div>
+          <div class="div-small" v-if="changeFlag">{{info.phone}}</div>
         </div>
       </el-col>
       <el-col :span="8" offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">邮箱</div>
-          <div class="div-small" v-if="flag">{{info.mail}}</div>
+          <div class="div-small" v-if="changeFlag">{{info.mail}}</div>
         </div>
       </el-col>
     </el-row>
@@ -49,48 +49,48 @@
     </el-row>
     <el-row>
       <el-col>
-        <el-button @click="onClick">修改</el-button>
-        <el-button @click="change" v-if="!flag">提交</el-button>
+        <el-button @click="onClick">{{changeButton}}</el-button>
+        <el-button @click="change" v-if="!changeFlag">提交</el-button>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-/* eslint-disable */
+  /* eslint-disable */
 
-import util from './js/util'
-import userMenu from './UserIndex'
-export default {
-  data () {
-    return {
-      info : {
-        name: '--',
-        sex: '--',
-        phone: '--',
-        mail: '--',
-        score: '--',
-        balance: '--'
-      },
-      flag: true
-    }
-  },
-  components: {
-    userMenu,
-  },
-  created () {
-    util.getUserIfo(this.info,-1)
-  },
-  methods: {
-    onClick(){
-      this.flag = !this.flag
+  import util from '../js/util'
+  import AdminIndex from './AdminIndex'
+  export default {
+    data () {
+      return {
+        info : {
+          name: '--',
+          sex: '--',
+          phone: '--',
+          mail: '--',
+          score: '--',
+          balance: '--'
+        },
+        changeFlag: true,
+        changeButton: '修改'
+      }
     },
-    change(){
-      alert(this.info.name)
-      this.flag = !this.flag
+    components: {
+      AdminIndex,
+    },
+    created () {
+      util.getUserIfo(this.info,-1)
+    },
+    methods: {
+      onClick(){
+        this.changeFlag = !this.changeFlag
+      },
+      change(){
+        this.changeFlag = !this.changeFlag
+      }
     }
   }
-}
 </script>
 
 <style scoped>

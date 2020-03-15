@@ -1,14 +1,14 @@
 <template>
   <el-tree :data="data"
            :props="defaultProps"
+           :highlight-current="true"
            ref="tree"
-           highlight-current
+           accordion
            show-checkbox
            check-strictly="true"
            node-key="id"
            @node-click="handleNodeClick"
-           @checl-change="checkChange"
-  class="el-tree-node">
+           @check-change="checkChange">
   </el-tree>
 </template>
 <script>
@@ -18,6 +18,7 @@
     data () {
       return {
         data: [],
+        editCheckId: 0,
         defaultProps: {
           children: 'children',
           label: 'name'
@@ -47,11 +48,11 @@
         this.$refs.tree.setCheckedKeys([item.id])
       },
       checkChange(item,node,self){
-        if (node == true) {
+        if (node === true) {
           this.editCheckId=item.id;
           this.$refs.tree.setCheckedKeys([item.id])
         }else {
-          if (this.editCheckId == item.id) {
+          if (this.editCheckId === item.id) {
             this.$refs.tree.setCheckedKeys([item.id])
           }
         }
@@ -61,12 +62,4 @@
 </script>
 
 <style scoped>
-  .el-tree-node{
-    .is-leaf + .el-checkbox .el-checkbox__inner{
-      display: inline-block;
-    }
-    .el-checkbox .el-checkbox__inner{
-      display: none;
-    }
-  }
 </style>

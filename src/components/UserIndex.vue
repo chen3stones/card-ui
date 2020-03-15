@@ -31,13 +31,17 @@
 <script>
 /* eslint-disable */
   export default {
-    name: 'userMenu',
+    name: 'userIndex',
     data () {
       return{
         menuItem: [
           {
             path: '/user/info',
             name: '个人信息'
+          },
+          {
+            path: '/goods/purchaseList',
+            name: '消费信息'
           },
           {
             path: '/user/advise',

@@ -9,8 +9,17 @@
         <el-form-item label="密码" prop="password" style="width: 350px;">
           <el-input v-model="loginForm.password" placeholder="密码" type="password"></el-input>
         </el-form-item>
+        <el-form-item label="角色">
+          <div>
+            <el-radio-group v-model="loginForm.role">
+              <el-radio-button :label="0">用户</el-radio-button>
+              <el-radio-button :label="1">管理员</el-radio-button>
+              <!--el-radio-button label="2">系统管理员</--el-radio-button-->
+            </el-radio-group>
+          </div>
+        </el-form-item>
         <el-form-item style="width: 350px;">
-          <el-button type="primary" @click="submitForm('loginForm')">提交</el-button>
+          <el-button type="primary" @click="submitForm('loginForm')">登录</el-button>
         </el-form-item>
       </el-form>
     </el-main>
@@ -99,9 +108,15 @@ export default {
       }
     }
     return {
+      roleEnum: {
+        USER: 0,
+        ADMIN: 1,
+        SYS_ADMIN: 2
+      },
       loginForm: {
         username: '',
-        password: ''
+        password: '',
+        role: 0
       },
       rules: {
         username: [
@@ -119,15 +134,25 @@ export default {
         if (valid) {
           axios.post('/api/user/login', this.loginForm)
             .then(result => {
-              if (result.data.code === 200 || result.data.code === 5007) {
-                this.$router.push({
-                  path: '/user/info'
-                })
+              if (result.data.code === 200) {
+                console.log(result.data.data.role)
+                if(result.data.data.role === this.roleEnum.USER) {
+                  this.$router.push({
+                    path: '/user/info'
+                  })
+                } else if(result.data.data.role === this.roleEnum.ADMIN){
+                  this.$router.push({
+                    path: '/admin/info'
+                  })
+                } else {
+                  this.$message.error('系统错误')
+                }
               } else {
                 this.$message.error(result.data.message)
               }
             })
             .catch(function (error) {
+              console.log('222')
               console.log(JSON.stringify(error))
             })
         } else {

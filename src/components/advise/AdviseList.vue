@@ -23,11 +23,8 @@
               <el-form-item label="回复时间" class="re-label">
                 <span>{{props.row.replyTime}}</span>
               </el-form-item>
-              <el-form-item label="回复内容" class="re-label">
+              <el-form-item label="回复内容" class="big-re-label">
                 <span>{{props.row.replyInfo}}</span>
-              </el-form-item>
-              <el-form-item label="回复内容" class="re-label">
-                <span>{{props.row.adviseInfo}}</span>
               </el-form-item>
             </div>
           </el-form>
@@ -77,6 +74,10 @@
   }
   .re-label {
     width: 190px;
+    color: #42b983;
+  }
+  .big-re-label {
+    width: 360px;
     color: #42b983;
   }
 </style>
