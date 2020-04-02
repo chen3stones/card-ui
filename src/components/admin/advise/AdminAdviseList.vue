@@ -39,6 +39,12 @@
     <el-table-column label="投诉/建议" prop="type"></el-table-column>
     <el-table-column label="投诉类别" prop="adviseMenu"></el-table-column>
     <el-table-column label="投诉时间" prop="adviseTime"></el-table-column>
+    <el-table-column label="回复状态" prop="replyUserName">
+      <template slot-scope="scope">
+        <el-button v-if="scope.row.replyUserName === ''" type="danger" size="mini">未回复</el-button>
+        <el-button v-else type="success" size="mini">已回复</el-button>
+      </template>
+    </el-table-column>
   </el-table>
   </div>
 </template>
@@ -81,7 +87,7 @@
             })
             let row = this.tableData[index]
             let data = result.data.data
-            row.a = data.replyUserName
+            row.replyUserName = data.replyUserName
             row.replyTime = data.replyTime
             row.replyInfo = data.replyInfo
           }

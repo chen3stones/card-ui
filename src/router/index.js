@@ -20,7 +20,10 @@ import AdminAdviseList from '../components/admin/advise/AdminAdviseList'
 import AdminGoodsList from '../components/admin/goods/AdminGoodsList'
 import AdminGoodsInfo from '../components/admin/goods/AdminGoodsInfo'
 import AdminAddGoods from '../components/admin/goods/AdminAddGoods'
-
+import AdminDiscountList from '../components/admin/shopping/AdminDiscountList'
+import AdminDiscountInfo from '../components/admin/shopping/AdminDiscountInfo'
+import AdminAddDiscount from '../components/admin/shopping/AdminAddDiscount'
+import Buy from '../components/admin/shopping/Buy'
 Vue.use(Router)
 
 export default new Router({
@@ -91,6 +94,10 @@ export default new Router({
           name: 'adminInfo',
           component: AdminInfo
         },
+
+        /**
+         * 用户管理
+         */
         {
           path: '/admin/user/list',
           name: 'userList',
@@ -106,11 +113,19 @@ export default new Router({
           name: 'adminManagerUser',
           component: AdminManageUser
         },
+
+        /**
+         * 建议与意见
+         */
         {
           path: '/admin/advise/list',
           name: 'adminAdviseList',
           component: AdminAdviseList
         },
+
+        /**
+         * 商品管理
+         */
         {
           path: '/admin/goods/list',
           name: 'adminGoodsList',
@@ -125,8 +140,32 @@ export default new Router({
           path: '/admin/goods/add',
           name: 'adminAddGoods',
           component: AdminAddGoods
+        },
+
+        /**
+         * 折扣管理
+         */
+        {
+          path: '/admin/discount/list',
+          name: 'discountList',
+          component: AdminDiscountList
+        },
+        {
+          path: '/admin/discount/info',
+          name: 'discountIfo',
+          component: AdminDiscountInfo
+        },
+        {
+          path: '/admin/discount/add',
+          name: 'adminAddDiscount',
+          component: AdminAddDiscount
         }
       ]
+    },
+    {
+      path: '/buy',
+      name: 'buy',
+      component: Buy
     }
   ]
 })

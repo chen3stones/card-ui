@@ -4,7 +4,7 @@
     <el-table-column prop="goodType" label="商品类别"></el-table-column>
     <el-table-column label="商品原价/折后价">
       <template slot-scope="scope">
-        <span>{{scope.row.goodOriginPrice/100}}元 / {{scope.row.goodRealPrice/100}}元</span>
+        <span>{{scope.row.goodOriginPrice}}元 / {{scope.row.goodRealPrice}}元</span>
       </template>
     </el-table-column>
     <el-table-column prop="inDiscount" label="是否参加折扣">
@@ -42,7 +42,7 @@
       getPurchaseList: function () {
         axios.get('/api/goods/list')
           .then(response => {
-            console.log(response)
+            //console.log(response)
             this.purchaseList = response.data.data
           })
       },

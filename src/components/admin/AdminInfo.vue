@@ -1,14 +1,14 @@
 <template>
   <div>
     <el-row class="row-bg">
-      <el-col :span="8" offset="3" class="el-col">
+      <el-col :span="8" :offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">姓名</div>
           <div class="div-small" v-if="changeFlag">{{info.name}}</div>
           <el-input v-model="info.name" :placeholder="info.name" v-if="!changeFlag"></el-input>
         </div>
       </el-col>
-      <el-col :span="8" offset="3" class="el-col">
+      <el-col :span="8" :offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">性别</div>
           <div class="div-small" v-if="changeFlag">{{info.sex}}</div>
@@ -20,13 +20,13 @@
       </el-col>
     </el-row>
     <el-row class="row-bg">
-      <el-col :span="8" offset="3" class="el-col">
+      <el-col :span="8" :offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">手机</div>
           <div class="div-small" v-if="changeFlag">{{info.phone}}</div>
         </div>
       </el-col>
-      <el-col :span="8" offset="3" class="el-col">
+      <el-col :span="8" :offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">邮箱</div>
           <div class="div-small" v-if="changeFlag">{{info.mail}}</div>
@@ -34,13 +34,13 @@
       </el-col>
     </el-row>
     <el-row class="row-bg">
-      <el-col :span="8" offset="3" class="el-col">
+      <el-col :span="8" :offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">积分</div>
           <div class="div-small">{{info.score}}</div>
         </div>
       </el-col>
-      <el-col :span="8" offset="3" class="el-col">
+      <el-col :span="8" :offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">余额</div>
           <div class="div-small">{{info.balance}}</div>

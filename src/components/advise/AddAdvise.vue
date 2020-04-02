@@ -79,6 +79,7 @@
                   title: '提交成功',
                   message: '您好，您的反馈我们已收到，将会尽快给您回复'
                 })
+                this.$router.push('/advise/list')
               }else {
                 // todo
               }

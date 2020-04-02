@@ -3,7 +3,7 @@
     <el-header>一卡通</el-header>
     <el-container>
       <el-aside width="200px">
-        <el-menu unique-opened="false" router mode="vertical" default-active="0" @select="handleSelect"
+        <el-menu :unique-opened="false" router mode="vertical" default-active="0" @select="handleSelect"
                  el-menu-vertical-demo>
           <div v-for="(subMenu,i) in menuItem">
             <el-submenu v-if="subMenu.children" :index="i+''">
@@ -75,6 +75,20 @@
                 path: '/admin/goods/add',
                 name: '增加商品'
               },
+            ]
+          },
+          {
+            path: '',
+            name: '促销管理',
+            children: [
+              {
+                path: '/admin/discount/list',
+                name: '促销方案'
+              },
+              {
+                path: '/admin/discount/add',
+                name: '新增方案'
+              }
             ]
           },
           {

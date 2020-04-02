@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div class="crumbs">
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{path: '/admin/user/list'}">所有用户</el-breadcrumb-item>
-        <el-breadcrumb-item >用户详情</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+    <el-page-header content="用户信息" title="返回" @back="$router.push('/admin/user/list')">
+    </el-page-header>
     <div>
       <el-row class="row-bg">
         <el-col :span="8" offset="3" class="el-col">
@@ -74,7 +70,7 @@
         <el-col>
           <el-button @click="onClick">{{changeButton}}</el-button>
           <el-button @click="change" v-if="!changeFlag">提交</el-button>
-          <el-button @click="open" type="danger" :disabled="info.status === '拉黑'">拉黑</el-button>
+          <el-button @click="open" type="danger">{{info.status === '拉黑' ? '取消拉黑' : '拉黑'}}</el-button>
         </el-col>
       </el-row>
     </div>
@@ -152,7 +148,8 @@
 
       },
       open() {
-        this.$confirm('是否确认拉黑该用户?', '提示', {
+        let text = this.info.status === '拉黑' ? '取消拉黑' : '拉黑'
+        this.$confirm('是否确认' + text + '该用户?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -170,17 +167,17 @@
                   message: result.data.data
                 })
               } else {
-                this.info.status = '拉黑'
+                this.info.status = text
                 this.$message({
                   type: 'success',
-                  message: '拉黑成功!'
+                  message: text + '成功!'
                 })
               }
             })
         }).catch(() => {
           this.$message({
             type: 'info',
-            message: '已放弃拉黑'
+            message: '已放弃' + text
           });
         });
       }

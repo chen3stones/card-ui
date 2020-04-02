@@ -152,7 +152,6 @@ export default {
               }
             })
             .catch(function (error) {
-              console.log('222')
               console.log(JSON.stringify(error))
             })
         } else {
