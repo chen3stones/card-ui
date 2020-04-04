@@ -24,6 +24,7 @@ import AdminDiscountList from '../components/admin/shopping/AdminDiscountList'
 import AdminDiscountInfo from '../components/admin/shopping/AdminDiscountInfo'
 import AdminAddDiscount from '../components/admin/shopping/AdminAddDiscount'
 import Buy from '../components/admin/shopping/Buy'
+import SalesStatistics from '../components/admin/shopping/SalesStatistics'
 Vue.use(Router)
 
 export default new Router({
@@ -54,7 +55,7 @@ export default new Router({
           component: UserInfo
         },
         {
-          path: '/goods/purchaseList',
+          path: '/purchase/list',
           name: 'purchaseList',
           component: PurchaseList
         },
@@ -159,6 +160,22 @@ export default new Router({
           path: '/admin/discount/add',
           name: 'adminAddDiscount',
           component: AdminAddDiscount
+        },
+        //销售管理
+        {
+          path: '/admin/purchase/list',
+          name: 'purchaseList',
+          component: PurchaseList
+        },
+        {
+          path: '/admin/goods/records',
+          name: 'goodsRecords',
+          component: GoodsRecords
+        },
+        {
+          path: '/admin/goods/statistics',
+          name: 'SalesStatistics',
+          component: SalesStatistics
         }
       ]
     },

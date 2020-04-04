@@ -62,7 +62,7 @@
               <el-table-column property="discountName" label="折扣名称" align="center">
                 <template slot-scope="scope" slot="header">
                   <span>折扣名称</span>
-                  <el-tooltip effect="dark" content="以下折扣顺序即为计算时的顺序" placement="top">
+                  <el-tooltip effect="dark" content="以下顺序即为计算时的顺序" placement="top">
                     <i class="el-icon-question"></i>
                   </el-tooltip>
                 </template>
@@ -117,14 +117,6 @@
     created () {
       this.getAllGoods()
     },
-    // watch: {
-    //   records: {
-    //     handler(newValue,oldValue) {
-    //       this.readyBuy()
-    //     },
-    //     deep:true
-    //   }
-    // },
     methods: {
       readyBuy() {
         this.visible = true

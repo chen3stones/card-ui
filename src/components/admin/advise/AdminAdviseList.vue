@@ -34,12 +34,12 @@
         </el-form>
       </template>
     </el-table-column>
-    <el-table-column label="投诉id" prop="id"></el-table-column>
-    <el-table-column label="投诉对象" prop="beAdviseName"></el-table-column>
-    <el-table-column label="投诉/建议" prop="type"></el-table-column>
-    <el-table-column label="投诉类别" prop="adviseMenu"></el-table-column>
-    <el-table-column label="投诉时间" prop="adviseTime"></el-table-column>
-    <el-table-column label="回复状态" prop="replyUserName">
+    <el-table-column label="投诉id" prop="id" align="center"></el-table-column>
+    <el-table-column label="投诉对象" prop="beAdviseName" align="center"></el-table-column>
+    <el-table-column label="投诉/建议" prop="type" align="center"></el-table-column>
+    <el-table-column label="投诉类别" prop="adviseMenu" align="center"></el-table-column>
+    <el-table-column label="投诉时间" prop="adviseTime" align="center"></el-table-column>
+    <el-table-column label="回复状态" prop="replyUserName" align="center">
       <template slot-scope="scope">
         <el-button v-if="scope.row.replyUserName === ''" type="danger" size="mini">未回复</el-button>
         <el-button v-else type="success" size="mini">已回复</el-button>

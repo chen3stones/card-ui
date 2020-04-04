@@ -40,7 +40,7 @@
             name: '个人信息'
           },
           {
-            path: '/goods/purchaseList',
+            path: '/purchase/list',
             name: '消费信息'
           },
           {

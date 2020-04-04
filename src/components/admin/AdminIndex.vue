@@ -60,6 +60,10 @@
               {
                 path: '/admin/purchase/list',
                 name: '销售记录'
+              },
+              {
+                path: '/admin/goods/statistics',
+                name: '销售统计'
               }
             ]
           },

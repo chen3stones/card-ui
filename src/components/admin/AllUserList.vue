@@ -1,13 +1,17 @@
 <template>
   <div>
     <el-table :data="tableData" :row-class-name="tableRowClassName">
-      <el-table-column label="ID" prop="id" width="50"></el-table-column>
-      <el-table-column label="姓名" prop="name" width="100"></el-table-column>
-      <el-table-column label="性别" prop="sex"></el-table-column>
-      <el-table-column label="电话" prop="phone"></el-table-column>
-      <el-table-column label="状态" prop="status"></el-table-column>
-      <el-table-column label="积分" prop="score"></el-table-column>
-      <el-table-column label="余额" prop="balance"></el-table-column>
+      <el-table-column label="ID" prop="id" width="50" align="center"></el-table-column>
+      <el-table-column label="姓名" prop="name" width="100" align="center"></el-table-column>
+      <el-table-column label="性别" prop="sex" align="center">
+        <template slot-scope="scope">
+          <span>{{sexEnum[scope.row.sex]}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="邮箱" prop="mail" align="center"></el-table-column>
+      <el-table-column label="状态" prop="status" align="center"></el-table-column>
+      <el-table-column label="积分" prop="score" align="center"></el-table-column>
+      <el-table-column label="余额" prop="balance" align="center"></el-table-column>
       <el-table-column label="管理">
         <template slot-scope="scope">
           <router-link :to="{path: '/admin/user/manage', query: {id: scope.row.id}}">
@@ -36,7 +40,11 @@ export default {
   name: 'UserList',
   data () {
     return {
-      tableData: []
+      tableData: [],
+      sexEnum: {
+          0: '男',
+          1: '女'
+      }
     }
   },
   created () {

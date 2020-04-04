@@ -11,7 +11,7 @@
       <el-col :span="8" :offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">性别</div>
-          <div class="div-small" v-if="changeFlag">{{info.sex}}</div>
+          <div class="div-small" v-if="changeFlag">{{sexEnum[info.sex]}}</div>
           <el-select placeholder="性别" v-model="info.sex" v-if="!changeFlag">
             <el-option label="男" value="0"></el-option>
             <el-option label="女" value="1"></el-option>
@@ -73,7 +73,11 @@
           balance: '--'
         },
         changeFlag: true,
-        changeButton: '修改'
+        changeButton: '修改',
+        sexEnum: {
+          0: '男',
+          1: '女'
+        }
       }
     },
     components: {
