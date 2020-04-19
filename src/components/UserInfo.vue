@@ -11,10 +11,10 @@
       <el-col :span="8" :offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">性别</div>
-          <div class="div-small" v-if="flag">{{info.sex}}</div>
+          <div class="div-small" v-if="flag">{{sexEnum[info.sex]}}</div>
           <el-select placeholder="性别" v-model="info.sex" v-if="!flag">
-            <el-option label="男" value="0"></el-option>
-            <el-option label="女" value="1"></el-option>
+            <el-option label="男" :value="0"></el-option>
+            <el-option label="女" :value="1"></el-option>
           </el-select>
         </div>
       </el-col>
@@ -49,7 +49,8 @@
     </el-row>
     <el-row>
       <el-col>
-        <el-button @click="onClick">修改</el-button>
+        <el-button @click="onClick">修
+          改</el-button>
         <el-button @click="change" v-if="!flag">提交</el-button>
       </el-col>
     </el-row>
@@ -72,7 +73,11 @@ export default {
         score: '--',
         balance: '--'
       },
-      flag: true
+      flag: true,
+      sexEnum: {
+        0: '男',
+        1: '女'
+      }
     }
   },
   components: {

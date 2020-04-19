@@ -13,8 +13,8 @@
           <div class="div-small">性别</div>
           <div class="div-small" v-if="changeFlag">{{sexEnum[info.sex]}}</div>
           <el-select placeholder="性别" v-model="info.sex" v-if="!changeFlag">
-            <el-option label="男" value="0"></el-option>
-            <el-option label="女" value="1"></el-option>
+            <el-option label="男" :value="0"></el-option>
+            <el-option label="女" :value="1"></el-option>
           </el-select>
         </div>
       </el-col>
@@ -23,13 +23,13 @@
       <el-col :span="8" :offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">手机</div>
-          <div class="div-small" v-if="changeFlag">{{info.phone}}</div>
+          <div class="div-small">{{info.phone}}</div>
         </div>
       </el-col>
       <el-col :span="8" :offset="3" class="el-col">
         <div class="bg-purple-light grid-content div-box">
           <div class="div-small">邮箱</div>
-          <div class="div-small" v-if="changeFlag">{{info.mail}}</div>
+          <div class="div-small">{{info.mail}}</div>
         </div>
       </el-col>
     </el-row>

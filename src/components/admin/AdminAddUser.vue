@@ -25,7 +25,7 @@
             value-format="timestamp"
             v-model="mailRegister.birthday"
             type="date"
-            placeholder="选择日期"
+            placeholder="选择生日"
             :picker-options="{
               disabledDate(time) {
               return time.getTime() > Date.now();

@@ -79,7 +79,7 @@
       </el-col>
       <el-col :span="8" :offset="5">
         <el-form-item>
-          <el-button type="primary" @click="addDiscount('discount')">添加商品</el-button>
+          <el-button type="primary" @click="addDiscount('discount')">添加</el-button>
         </el-form-item>
       </el-col>
     </el-row>

@@ -25,12 +25,16 @@ import AdminDiscountInfo from '../components/admin/shopping/AdminDiscountInfo'
 import AdminAddDiscount from '../components/admin/shopping/AdminAddDiscount'
 import Buy from '../components/admin/shopping/Buy'
 import SalesStatistics from '../components/admin/shopping/SalesStatistics'
+import Echarts from '../components/Echarts'
+import AdminAddMessage from '../components/admin/message/AdminAddMessage'
+import AdminSendMessageList from '../components/admin/message/AdminSendMessageList'
+import MessageList from '../components/message/MessageList'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/hello',
       name: 'HelloWorld',
       component: HelloWorld
     },
@@ -73,13 +77,13 @@ export default new Router({
           path: '/advise/add',
           name: 'addAdviseMenu',
           component: AddAdvise
+        },
+        {
+          path: '/user/message/list',
+          name: 'messageList',
+          component: MessageList
         }
       ]
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
     },
 
     /**
@@ -176,13 +180,41 @@ export default new Router({
           path: '/admin/goods/statistics',
           name: 'SalesStatistics',
           component: SalesStatistics
+        },
+        /**
+         * 消息通知
+         */
+        {
+          path: '/admin/message/add',
+          name: 'adminAddMessage',
+          component: AdminAddMessage
+        },
+        {
+          path: '/admin/message/list',
+          name: 'adminMessageList',
+          component: AdminSendMessageList
+        },
+        {
+          path: '/message/list',
+          name: 'messageList',
+          component: MessageList
         }
       ]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/buy',
       name: 'buy',
       component: Buy
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: Echarts
     }
   ]
 })

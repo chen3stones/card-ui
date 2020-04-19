@@ -41,6 +41,24 @@
           },
           {
             path: '',
+            name: '消息管理',
+            children: [
+              {
+                path: '/admin/message/add',
+                name: '发送消息'
+              },
+              {
+                path: '/admin/message/list',
+                name: '发送消息列表'
+              },
+              {
+                path: '/message/list',
+                name: '我的消息'
+              }
+            ]
+          },
+          {
+            path: '',
             name: '用户管理',
             children: [
               {

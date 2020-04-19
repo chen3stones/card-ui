@@ -40,6 +40,10 @@
             name: '个人信息'
           },
           {
+            path: '/user/message/list',
+            name: '我的消息'
+          },
+          {
             path: '/purchase/list',
             name: '消费信息'
           },
