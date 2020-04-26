@@ -1,30 +1,38 @@
 <template>
-  <el-container>
-    <el-header>一卡通</el-header>
+  <div  style="background: #e5e9f2; height: 100%">
     <el-container>
-      <el-aside width="200px">
-        <el-menu :unique-opened="false" router mode="vertical" default-active="0" @select="handleSelect"
-                 el-menu-vertical-demo>
-          <div v-for="(subMenu,i) in menuItem">
-            <el-submenu v-if="subMenu.children" :index="i+''">
-              <template slot="title">
-                <span>{{subMenu.name}}</span>
-              </template>
-              <el-menu-item v-for="(item,k) in subMenu.children" :key="k" :index="item.path">
-                {{item.name}}
+      <el-header style="background: #409EFF" height="80px">
+
+      </el-header>
+      <el-container style="height: 100%">
+        <el-aside style="background: #99a9bf">
+          <el-image
+            style="width: 100px; height: 100px"
+            src="https://t41.pixhost.to/thumbs/419/146350041_2.jpg"
+          ></el-image>
+          <el-menu :unique-opened="false" router mode="vertical" default-active="0" @select="handleSelect"
+                   el-menu-vertical-demo style="background: #99a9bf">
+            <div v-for="(subMenu,i) in menuItem">
+              <el-submenu v-if="subMenu.children" :index="i+''">
+                <template slot="title">
+                  <span>{{subMenu.name}}</span>
+                </template>
+                <el-menu-item v-for="(item,k) in subMenu.children" :key="k" :index="item.path">
+                  {{item.name}}
+                </el-menu-item>
+              </el-submenu>
+              <el-menu-item v-if="!subMenu.children" :key="i" :index="subMenu.path">
+                {{subMenu.name}}
               </el-menu-item>
-            </el-submenu>
-            <el-menu-item v-if="!subMenu.children" :key="i" :index="subMenu.path">
-              {{subMenu.name}}
-            </el-menu-item>
-          </div>
-        </el-menu>
-      </el-aside>
-      <el-main>
-        <router-view></router-view>
-      </el-main>
+            </div>
+          </el-menu>
+        </el-aside>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
+      </el-container>
     </el-container>
-  </el-container>
+  </div>
 
 </template>
 
@@ -49,7 +57,7 @@
               },
               {
                 path: '/admin/message/list',
-                name: '发送消息列表'
+                name: '发送的消息'
               },
               {
                 path: '/message/list',

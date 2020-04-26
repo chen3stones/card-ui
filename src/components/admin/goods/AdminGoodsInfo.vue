@@ -107,15 +107,12 @@
       }
       var checkNumber = (rule, value, callback) => {
         const reg = /^(([1-9]\d*)|[0])$/
-        if(!value) {
-          callback(new Error('请输入数量'))
-        }else {
-          if(!reg.test(value))
-          {
-            callback(new Error('请输入正确的数量'))
-          }else{
-            callback()
-          }
+        console.log(value)
+        if(!reg.test(value))
+        {
+          callback(new Error('请输入正确的数量'))
+        }else{
+          callback()
         }
       }
       return {
@@ -191,7 +188,7 @@
         }).then(() => {
           let list = []
           list.push(this.info.id)
-          axios.post('/api/goods/delete',list)
+          axios.post('/api/goods/admin/delete',list)
             .then(result => {
               if (result.data.code !== 200) {
                 this.$message({
@@ -204,7 +201,7 @@
                   type: 'success',
                   message: '删除成功,即将跳转到商品列表'
                 })
-                this.$router.push('/admin/goods/list')
+                this.$router.push('/admin/goods/admin/list')
               }
             })
         }).catch(() => {
@@ -230,8 +227,8 @@
                 this.$message.error('商品种类选择错误')
               }
             }
-            console.log(this.info)
-            axios.post('/api/goods/update',this.info)
+            //console.log(this.info)
+            axios.post('/api/goods/admin/update',this.info)
             .then(result => {
               if(result.data.code === 200) {
                 this.$notify({

@@ -61,7 +61,7 @@ export default {
           }
         })
         .catch(error => {
-          this.$message(error)
+          console.log(error.response.status)
         })
     },
     tableRowClassName({row, rowIndex}) {

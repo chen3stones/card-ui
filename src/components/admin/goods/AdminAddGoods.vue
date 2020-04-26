@@ -144,7 +144,7 @@
               this.$message.error('请选择商品种类')
               return
             }
-            axios.post('/api/goods/add', this.goods)
+            axios.post('/api/goods/admin/add', this.goods)
               .then(result => {
                 if (result.data.code === 200) {
                   this.$notify({

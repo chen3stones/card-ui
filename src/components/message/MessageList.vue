@@ -1,10 +1,10 @@
 <template>
-    <el-table :data="messageList">
+    <el-table :data="messageList" :row-class-name="tableRowClassName">
       <el-table-column label="标题" prop="title"></el-table-column>
       <el-table-column label="时间" prop="sendTime"></el-table-column>
       <el-table-column prop="id" label="管理" align="center">
         <template slot-scope="scope">
-          <router-link :to="{path: '/admin/goods/info', params: {info: scope.row}}">
+          <router-link :to="{path: '/admin/message/info', query: {id: scope.row.id}}">
             <el-button
               size="min">
               详情
@@ -34,6 +34,15 @@
               this.$message.error(result.data.message)
             }
         })
+      },
+      tableRowClassName({row, rowIndex}) {
+        console.log(row.status)
+        if (row.status === 0) {
+          return ''
+        } else if(row.status === 1) {
+          return 'read'
+        }
+        return ''
       }
     },
     created() {
@@ -42,6 +51,11 @@
   }
 </script>
 
-<style scoped>
-
+<style>
+  .el-table .read {
+    background: #F2F6FC;
+  }
+  .el-table .normal-row {
+    background: #f0f9eb;
+  }
 </style>

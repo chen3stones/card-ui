@@ -29,6 +29,7 @@ import Echarts from '../components/Echarts'
 import AdminAddMessage from '../components/admin/message/AdminAddMessage'
 import AdminSendMessageList from '../components/admin/message/AdminSendMessageList'
 import MessageList from '../components/message/MessageList'
+import MessageInfo from '../components/message/MessageInfo'
 Vue.use(Router)
 
 export default new Router({
@@ -82,6 +83,11 @@ export default new Router({
           path: '/user/message/list',
           name: 'messageList',
           component: MessageList
+        },
+        {
+          path: '/user/message/info',
+          name: 'adminMessageInfo',
+          component: MessageInfo
         }
       ]
     },
@@ -198,6 +204,11 @@ export default new Router({
           path: '/message/list',
           name: 'messageList',
           component: MessageList
+        },
+        {
+          path: '/admin/message/info',
+          name: 'adminMessageInfo',
+          component: MessageInfo
         }
       ]
     },

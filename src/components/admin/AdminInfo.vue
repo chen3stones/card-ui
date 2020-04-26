@@ -2,7 +2,7 @@
   <div>
     <el-row class="row-bg">
       <el-col :span="8" :offset="3" class="el-col">
-        <div class="bg-purple-light grid-content div-box">
+        <div class="bg-purple-light grid-content div-box box-shadow">
           <div class="div-small">姓名</div>
           <div class="div-small" v-if="changeFlag">{{info.name}}</div>
           <el-input v-model="info.name" :placeholder="info.name" v-if="!changeFlag"></el-input>
@@ -49,7 +49,8 @@
     </el-row>
     <el-row>
       <el-col>
-        <el-button @click="onClick">{{changeButton}}</el-button>
+        <el-button @click="onClick" v-if="changeFlag">修改</el-button>
+        <el-button @click="onClick" v-else>取消</el-button>
         <el-button @click="change" v-if="!changeFlag">提交</el-button>
       </el-col>
     </el-row>
@@ -101,12 +102,6 @@
   .el-col {
     border-radius: 4px;
   }
-  .bg-purple-dark {
-    background: #99a9bf;
-  }
-  .bg-purple {
-    background: #d3dce6;
-  }
   .bg-purple-light {
     background: #e5e9f2;
   }
@@ -118,7 +113,8 @@
     padding: 10px 0;
   }
   .div-box {
-    padding: 10px;
+    padding: 10px
+  ;
   }
   .div-small {
     margin: 5px;

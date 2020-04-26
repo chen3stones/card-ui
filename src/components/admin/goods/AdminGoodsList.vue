@@ -40,7 +40,7 @@
     },
     methods: {
       getPurchaseList: function () {
-        axios.get('/api/goods/list')
+        axios.get('/api/goods/admin/list')
           .then(response => {
             //console.log(response)
             this.purchaseList = response.data.data
