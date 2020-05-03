@@ -1,35 +1,61 @@
 <template>
     <!--销售统计-->
   <el-container>
-<!--    <el-header>-->
-<!--      <el-row align="center">-->
-<!--        <el-col :span="5">商品总数</el-col>-->
-<!--        <el-col :span="5">折扣总数</el-col>-->
-<!--      </el-row>-->
-<!--    </el-header>-->
     <el-main>
-      <el-button-group v-model="time">
-        <el-button @click="getData(1)">今天</el-button>
-        <el-button @click="getData(2)">近1月</el-button>
-        <el-button @click="getData(3)">近半年</el-button>
-        <el-button @click="getData(4)">汇总</el-button>
-      </el-button-group>
       <el-row>
-        <el-col :offset="2" :span="8">
-          <div id="totalMoneyHistogram" :style="{width: '500px', height: '280px'}"></div>
+        <el-col :span="5" :offset="3">
+          <el-switch
+            style="display: block"
+            v-model="dateFlag"
+            active-color="#13ce66"
+            inactive-color="#13ce66"
+            inactive-text="快捷选择"
+            active-text="自定义">
+          </el-switch>
         </el-col>
-        <el-col :span="8" :offset="3">
-          <div id="totalRecordHistogram" :style="{width: '500px', height: '280px'}"></div>
+        <el-col :span="10" :offset="2">
+          <el-button-group v-model="time" v-if="!dateFlag">
+            <el-button @click="getData(0,1)">今天</el-button>
+            <el-button @click="getData(0,2)">近1月</el-button>
+            <el-button @click="getData(0,3)">近半年</el-button>
+            <el-button @click="getData(0,4)">近一年</el-button>
+          </el-button-group>
+        </el-col>
+        <el-col :span="12" :offset="3" v-if="dateFlag">
+          <el-date-picker
+            v-model="dateRange"
+            type="daterange"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期">
+          </el-date-picker>
+          <el-button @click="datePiker">搜索</el-button>
         </el-col>
       </el-row>
-      <el-row>
-        <el-col :offset="2" :span="8">
-          <div id="averagePriceListHistogram" :style="{width: '500px', height: '280px'}"></div>
-        </el-col>
-        <el-col :span="8" :offset="3">
-          <div id="totalGoodsNumberHistogram" :style="{width: '500px', height: '280px'}"></div>
-        </el-col>
-      </el-row>
+      <el-tabs stretch>
+        <el-tab-pane label="图表">
+          <el-row>
+            <el-col :offset="2" :span="8">
+              <div id="totalMoneyHistogram" :style="{width: '500px', height: '280px'}"></div>
+            </el-col>
+            <el-col :span="8" :offset="3">
+              <div id="totalRecordHistogram" :style="{width: '500px', height: '280px'}"></div>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :offset="2" :span="8">
+              <div id="averagePriceListHistogram" :style="{width: '500px', height: '280px'}"></div>
+            </el-col>
+            <el-col :span="8" :offset="3">
+              <div id="totalGoodsNumberHistogram" :style="{width: '500px', height: '280px'}"></div>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
+        <el-tab-pane label="数据">
+          <span>123</span>
+        </el-tab-pane>
+      </el-tabs>
+
 
     </el-main>
   </el-container>
@@ -41,7 +67,8 @@
     name: "SalesStatistics",
     data() {
       return{
-        time: 1,
+        sTime: 0,
+        eTime: 0,
         statisticsView : {
           //日期
           dateList: [],
@@ -53,7 +80,9 @@
           averagePriceList: [],
           //销售商品总数
           totalGoodsNumberList: []
-        }
+        },
+        dateRange: [],
+        dateFlag: false
       }
     },
     mounted (){
@@ -63,12 +92,12 @@
       this.drawTotalNumberHistogram()
     },
     methods : {
-      getData(time) {
+      getData(sTime,eTime) {
         axios.get('/api/shopping/statistics',
           {
             params: {
-              'sTime' : 0,
-              'eTime' : time
+              'sTime' : sTime,
+              'eTime' : eTime
             }
           })
         .then(result => {
@@ -80,9 +109,20 @@
             this.drawAveragePriceListHistogram()
             this.drawTotalNumberHistogram()
           }else{
-            this.$message.error(result.message)
+            this.$message.error(result.data.message)
           }
         })
+      },
+      datePiker() {
+        console.log(this.dateRange)
+        if( this.dateRange.length !== 2) {
+          this.$message.error('请选择正确的时间')
+        } else {
+          let timeList = this.dateRange
+          let sTime = Date.parse(timeList[0])
+          let eTime = Date.parse(timeList[1])
+          this.getData(sTime,eTime)
+        }
       },
       drawTotalMoneyHistogram(){
         //初始化echarts实例
@@ -184,6 +224,9 @@
         };
         totalNumberHistogram.setOption(option)
       },
+      inputDate(){
+        this.dateFlag = !this.dateFlag
+      }
     }
   }
 </script>

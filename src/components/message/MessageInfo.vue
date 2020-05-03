@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-page-header content="消息" title="返回" @back="$router.push('/message/list')">
+    <el-page-header content="消息" title="返回" @back="$router.push(path)">
     </el-page-header>
     <el-header>
       <el-row type="center">
@@ -21,24 +21,30 @@
   import axios from 'axios'
   export default {
     name: "MessageInfo",
-    data() {
-      return{
+    data () {
+      return {
         id: 0,
-        info: {}
+        info: {},
+        path: ''
       }
     },
-    created(){
+    created () {
       this.id = this.$route.query.id
       this.read()
+      if(this.$route.path === '/admin/message/info') {
+        this.path = '/admin/message/list'
+      }else{
+        this.path = '/user/message/list'
+      }
     },
     methods: {
-      read() {
+      read () {
         axios.get('/api/message/user/info',
-          {params: {'id':this.id}})
-        .then(result => {
-          this.info = result.data.data
-          console.log(this.info)
-        })
+          {params: {'id': this.id}})
+          .then(result => {
+            this.info = result.data.data
+            console.log(this.info)
+          })
       }
     }
   }

@@ -1,10 +1,11 @@
 <template>
-    <el-table :data="messageList" :row-class-name="tableRowClassName">
+  <div>
+    <el-table :data="pagination.tableData" :row-class-name="tableRowClassName">
       <el-table-column label="标题" prop="title"></el-table-column>
       <el-table-column label="时间" prop="sendTime"></el-table-column>
       <el-table-column prop="id" label="管理" align="center">
         <template slot-scope="scope">
-          <router-link :to="{path: '/admin/message/info', query: {id: scope.row.id}}">
+          <router-link :to="{path: path, query: {id: scope.row.id,page: pagination.pageSize}}">
             <el-button
               size="min">
               详情
@@ -13,6 +14,17 @@
         </template>
       </el-table-column>
     </el-table>
+    <div>
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :current-page="pagination.currentPage"
+        :page-size="pagination.pageSize"
+        :total="pagination.total"
+        :hide-on-single-page = "hidePage"
+        background>
+      </el-pagination>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -21,22 +33,35 @@
     name: "MessageList",
     data(){
       return{
-        messageList: []
+        pagination: {
+          pageSize: 10,
+          currentPage: 1,
+          tableData: []
+        },
+        hidePage: true,
+        path: ''
       }
     },
     methods: {
       getMessageList() {
-        axios.get('/api/message/list')
-          .then(result => {
+        axios.get('/api/message/list',{
+          params: {pageSize: this.pagination.pageSize,currentPage: this.pagination.currentPage}}
+        ).then(result => {
             if(result.data.code === 200) {
-              this.messageList = result.data.data
+              this.pagination = result.data.data
+              if(this.pagination.pageSize < this.pagination.total) {
+                this.hidePage = false
+              }
             }else{
               this.$message.error(result.data.message)
             }
         })
       },
+      handleCurrentChange(val) {
+        this.pagination.currentPage = val
+        this.getMessageList()
+      },
       tableRowClassName({row, rowIndex}) {
-        console.log(row.status)
         if (row.status === 0) {
           return ''
         } else if(row.status === 1) {
@@ -46,7 +71,16 @@
       }
     },
     created() {
+      this.pagination.currentPage = Number(localStorage.getItem('messagePage')) || 1
       this.getMessageList()
+      if(this.$route.path === '/admin/message/list') {
+        this.path = '/admin/message/info'
+      }else{
+        this.path = '/user/message/info'
+      }
+    },
+    beforeDestroy (){
+      localStorage.setItem('messagePage',this.pagination.currentPage)
     }
   }
 </script>

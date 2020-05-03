@@ -172,18 +172,20 @@
         }
       },
       getAllGoods() {
-        axios.get('/api/goods/list')
+        axios.get('/api/goods/admin/list',
+          {params: {pageSize: 0,currentPage: 0}})
         .then(result => {
-          this.goods = result.data.data
+          this.goods = result.data.data.tableData
           //this.records = this.goods
-          for(let i = 0; i < result.data.data.length;i ++) {
-            let tmp = result.data.data[i]
+          for(let i = 0; i < result.data.data.tableData.length;i ++) {
+            let tmp = result.data.data.tableData[i]
             this.goodMap.set(tmp.id,tmp)
           }
         })
       },
       addGoods() {
         if(this.data) {
+          console.log(this.goodMap)
           if(this.goodMap.has(this.data)) {
             let index = this.getIndex(this.records,this.data)
             //已经加到了列表中
@@ -198,6 +200,7 @@
               data.number = 1
               this.records.push(data)
             }
+            console.log(this.records)
           }
         }
       },

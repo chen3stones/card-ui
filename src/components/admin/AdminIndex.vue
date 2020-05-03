@@ -2,14 +2,10 @@
   <div  style="background: #e5e9f2; height: 100%">
     <el-container>
       <el-header style="background: #409EFF" height="80px">
-
+        <h1>一卡通管理系统</h1>
       </el-header>
       <el-container style="height: 100%">
         <el-aside style="background: #99a9bf">
-          <el-image
-            style="width: 100px; height: 100px"
-            src="https://t41.pixhost.to/thumbs/419/146350041_2.jpg"
-          ></el-image>
           <el-menu :unique-opened="false" router mode="vertical" default-active="0" @select="handleSelect"
                    el-menu-vertical-demo style="background: #99a9bf">
             <div v-for="(subMenu,i) in menuItem">
@@ -56,11 +52,11 @@
                 name: '发送消息'
               },
               {
-                path: '/admin/message/list',
+                path: '/admin/sendMessage/list',
                 name: '发送的消息'
               },
               {
-                path: '/message/list',
+                path: '/admin/message/list',
                 name: '我的消息'
               }
             ]

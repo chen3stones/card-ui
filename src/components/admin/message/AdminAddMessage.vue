@@ -10,9 +10,9 @@
     <el-row>
       <el-col>
         <el-form-item prop="type" label="用户">
-          <el-select v-model="message.userGroup" placeholder="用户" style="width: 350px" multiple>
+          <el-select v-model="message.userGroup" :placeholder="a" style="width: 350px" multiple filterable>
             <el-option
-              v-for="(item,index) in userList"
+              v-for="(item,index) in pagination.tableData"
               :key="index"
               :label="item.name"
               :value="item.id">
@@ -44,6 +44,11 @@
   export default {
     data () {
       return {
+        pagination: {
+          pageSize: 0,
+          currentPage: 0,
+          tableData: []
+        },
         message: {
           title: '',
           content: '',
@@ -54,11 +59,14 @@
     },
     methods: {
       getAllUser() {
-        axios.get('/api/user/list')
+        axios.get("/api/user/list",{
+          params: {pageSize: this.pagination.pageSize,currentPage: this.pagination.currentPage}
+        })
           .then(result => {
             if(result.data.code === 200) {
               console.log(result.data.data)
-              this.userList = result.data.data
+              this.pagination = result.data.data
+              //this.userList = result.data.data.tableData
             } else {
               this.$message.error("获取用户列表失败")
             }
@@ -74,6 +82,9 @@
                 title: '消息发送',
                 message: ('hi', {style: 'color: teal'}, '消息发送成功')
               });
+              this.message.title = ""
+              this.message.content = ""
+              this.message.userGroup = []
             } else {
               this.$message.error(result.data.message)
             }

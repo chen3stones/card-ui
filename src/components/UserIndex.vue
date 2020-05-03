@@ -1,10 +1,12 @@
 <template>
   <el-container>
-    <el-header>一卡通</el-header>
-    <el-container>
-      <el-aside width="200px">
+    <el-header style="background: #409EFF">
+      <h1>一卡通管理系统</h1>
+    </el-header>
+    <el-container style="height: 100%">
+      <el-aside style="background: #99a9bf">
         <el-menu :unique-opened="true" router mode="vertical" :default-active="this.$router.path" @select="handleSelect"
-                 el-menu-vertical-demo default-active="/user/info">
+                 el-menu-vertical-demo style="background: #99a9bf">
           <div v-for="(subMenu,i) in menuItem">
             <el-submenu v-if="subMenu.children" :index="subMenu.path">
               <template slot="title">

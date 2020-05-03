@@ -4,34 +4,34 @@
     </el-page-header>
     <div>
       <el-row class="row-bg">
-        <el-col :span="8" offset="3" class="el-col">
+        <el-col :span="8" :offset="3" class="el-col">
           <div class="bg-purple-light grid-content div-box">
             <div class="div-small">姓名</div>
             <div class="div-small" v-if="changeFlag">{{info.name}}</div>
             <el-input v-model="info.name" :placeholder="info.name" v-if="!changeFlag"></el-input>
           </div>
         </el-col>
-        <el-col :span="8" offset="3" class="el-col">
+        <el-col :span="8" :offset="3" class="el-col">
           <div class="bg-purple-light grid-content div-box">
             <div class="div-small">性别</div>
             <div class="div-small" v-if="changeFlag">{{sexEnum.getLabelByValue(info.sex)}}</div>
             <div class="div-small" v-else>
               <el-select v-model="info.sex">
-                <el-option label="男" value=0></el-option>
-                <el-option label="女" value=1></el-option>
+                <el-option label="男" :value=0></el-option>
+                <el-option label="女" :value=1></el-option>
               </el-select>
             </div>
           </div>
         </el-col>
       </el-row>
       <el-row class="row-bg">
-        <el-col :span="8" offset="3" class="el-col">
+        <el-col :span="8" :offset="3" class="el-col">
           <div class="bg-purple-light grid-content div-box">
             <div class="div-small">手机</div>
             <div class="div-small">{{info.phone}}</div>
           </div>
         </el-col>
-        <el-col :span="8" offset="3" class="el-col">
+        <el-col :span="8" :offset="3" class="el-col">
           <div class="bg-purple-light grid-content div-box">
             <div class="div-small">邮箱</div>
             <div class="div-small">{{info.mail}}</div>
@@ -39,13 +39,13 @@
         </el-col>
       </el-row>
       <el-row class="row-bg">
-        <el-col :span="8" offset="3" class="el-col">
+        <el-col :span="8" :offset="3" class="el-col">
           <div class="bg-purple-light grid-content div-box">
             <div class="div-small">积分</div>
             <div class="div-small">{{info.score}}</div>
           </div>
         </el-col>
-        <el-col :span="8" offset="3" class="el-col">
+        <el-col :span="8" :offset="3" class="el-col">
           <div class="bg-purple-light grid-content div-box">
             <div class="div-small">余额</div>
             <div class="div-small">{{info.balance}}</div>
@@ -53,16 +53,23 @@
         </el-col>
       </el-row>
       <el-row class="row-bg">
-        <el-col :span="8" offset="3" class="el-col">
+        <el-col :span="8" :offset="3" class="el-col">
           <div class="bg-purple-light grid-content div-box">
             <div class="div-small">状态</div>
             <div class="div-small">{{info.status}}</div>
           </div>
         </el-col>
-        <el-col :span="8" offset="3" class="el-col">
+        <el-col :span="8" :offset="3" class="el-col">
           <div class="bg-purple-light grid-content div-box">
-            <div class="div-small">暂无</div>
-            <div class="div-small">--</div>
+            <div class="div-small">角色</div>
+            <div class="div-small" v-if="changeFlag">{{roleEnum[info.role]}}</div>
+            <div class="div-small" v-else>
+              <el-select v-model="info.role">
+                <el-option label="普通用户" :value="0"></el-option>
+                <el-option label="用户管理员" :value="1"></el-option>
+                <el-option label="系统管理员" :value="2"></el-option>
+              </el-select>
+            </div>
           </div>
         </el-col>
       </el-row>
@@ -96,7 +103,8 @@
           mail: '--',
           score: '--',
           balance: '--',
-          status: ''
+          status: '',
+          role: 0
         },
         changeFlag: true,
         deleteFlag: true,
@@ -104,7 +112,12 @@
         sexEnum:
           new Enum().add('男',0)
           .add('女',1)
-          .add('未知',-1)
+          .add('未知',-1),
+        roleEnum: {
+          0 : '普通用户',
+          1 : '用户管理员',
+          2 : '系统管理员'
+        }
       }
     },
     components: {
@@ -119,6 +132,7 @@
         this.changeFlag = !this.changeFlag
         if(this.changeFlag) {
           this.changeButton = '修改'
+          util.getUserIfo(this.info,this.info.id)
         } else {
           this.changeButton = '放弃'
         }

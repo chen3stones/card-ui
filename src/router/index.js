@@ -196,12 +196,12 @@ export default new Router({
           component: AdminAddMessage
         },
         {
-          path: '/admin/message/list',
+          path: '/admin/sendMessage/list',
           name: 'adminMessageList',
           component: AdminSendMessageList
         },
         {
-          path: '/message/list',
+          path: '/admin/message/list',
           name: 'messageList',
           component: MessageList
         },

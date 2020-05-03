@@ -8,7 +8,7 @@
           <el-table-column prop="id" label="商品Id"></el-table-column>
           <el-table-column prop="goodName" label="商品名称"></el-table-column>
           <el-table-column prop="num" label="商品数量"></el-table-column>
-          <el-table-column label="商品价格">
+          <el-table-column label="划线价">
             <template slot-scope="scope">
               <span>{{scope.row.originMoney/100}}元</span>
             </template>
@@ -83,7 +83,7 @@
           url = '/api/goods/admin/records'
         }else{
           this.back = '/purchase/list'
-          url = '/api/goods/records'
+          url = '/api/goods/user/records'
         }
         let id = this.$route.params.id
         axios.get(url,

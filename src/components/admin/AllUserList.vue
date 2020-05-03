@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table :data="tableData" :row-class-name="tableRowClassName">
+    <el-table :data="pagination.tableData" :row-class-name="tableRowClassName">
       <el-table-column label="ID" prop="id" width="50" align="center"></el-table-column>
       <el-table-column label="姓名" prop="name" width="100" align="center"></el-table-column>
       <el-table-column label="性别" prop="sex" align="center">
@@ -23,6 +23,17 @@
         </template>
       </el-table-column>
     </el-table>
+    <div>
+      <el-pagination
+        @current-change="handleCurrentChange"
+       :current-page="pagination.currentPage"
+       :page-size="pagination.pageSize"
+       :total="pagination.total"
+        :hide-on-single-page = "hidePage"
+      background>
+
+      </el-pagination>
+    </div>
   </div>
 </template>
 <style>
@@ -36,26 +47,42 @@
 </style>
 <script>
 import axios from 'axios'
+import {getUserInfo} from '../../axios/api/UserApi'
 export default {
   name: 'UserList',
   data () {
     return {
-      tableData: [],
+      pagination: {
+        pageSize: 10,
+        currentPage: 1,
+        tableData: []
+      },
+      hidePage: true,
       sexEnum: {
           0: '男',
           1: '女'
       }
     }
   },
-  created () {
+  created() {
     this.getUserList()
+    this.pagination.currentPage = Number(localStorage.getItem('userPage')) || 1
+  },
+  beforeDestroy (){
+    localStorage.setItem('userPage',this.pagination.currentPage)
   },
   methods: {
     getUserList: function () {
-      axios.get('/api/user/list')
+      axios.get('/api/user/list',
+        {
+          params: {pageSize: this.pagination.pageSize,currentPage: this.pagination.currentPage}
+        })
         .then(response => {
           if (response.data.code === 200) {
-            this.tableData = response.data.data
+            this.pagination = response.data.data
+            if(this.pagination.pageSize < this.pagination.total) {
+              this.hidePage = false
+            }
           } else {
             this.$message(response.data.message)
           }
@@ -63,6 +90,10 @@ export default {
         .catch(error => {
           console.log(error.response.status)
         })
+    },
+    handleCurrentChange(val) {
+      this.pagination.currentPage = val
+      this.getUserList()
     },
     tableRowClassName({row, rowIndex}) {
       if (row.status === '正常状态') {
@@ -72,6 +103,7 @@ export default {
       }
       return ''
     }
-  }
+  },
+
 }
 </script>
