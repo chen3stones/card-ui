@@ -24,7 +24,7 @@
     </el-row>
     <el-row type="flex" justify="center">
       <el-col :span="15">
-        <el-select v-model="data" placeholder="商品名称" style="width: 350px">
+        <el-select v-model="data" placeholder="商品名称" style="width: 550px">
           <el-option
             v-for="(item,index) in goods"
             :key="index"

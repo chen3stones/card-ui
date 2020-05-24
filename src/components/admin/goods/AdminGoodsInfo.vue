@@ -201,7 +201,7 @@
                   type: 'success',
                   message: '删除成功,即将跳转到商品列表'
                 })
-                this.$router.push('/admin/goods/admin/list')
+                this.$router.push('/admin/goods/list')
               }
             })
         }).catch(() => {

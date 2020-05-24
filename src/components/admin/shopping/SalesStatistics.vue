@@ -52,11 +52,15 @@
           </el-row>
         </el-tab-pane>
         <el-tab-pane label="数据">
-          <span>123</span>
+          <el-table :data="totalList" show-summary :summary-method="getSummaries">
+            <el-table-column label="时间" prop="date"></el-table-column>
+            <el-table-column label="总金额" prop="totalMoney"></el-table-column>
+            <el-table-column label="订单总数" prop="totalRecord"></el-table-column>
+            <el-table-column label="订单均价" prop="averagePrice"></el-table-column>
+            <el-table-column label="销售商品总数" prop="totalGoodsNumber"></el-table-column>
+          </el-table>
         </el-tab-pane>
       </el-tabs>
-
-
     </el-main>
   </el-container>
 </template>
@@ -82,7 +86,8 @@
           totalGoodsNumberList: []
         },
         dateRange: [],
-        dateFlag: false
+        dateFlag: false,
+        totalList: []
       }
     },
     mounted (){
@@ -108,6 +113,7 @@
             this.drawTotalRecordHistogram()
             this.drawAveragePriceListHistogram()
             this.drawTotalNumberHistogram()
+            this.getTotalData()
           }else{
             this.$message.error(result.data.message)
           }
@@ -226,6 +232,58 @@
       },
       inputDate(){
         this.dateFlag = !this.dateFlag
+      },
+      getTotalData() {
+        this.totalList = []
+        for(let i = 0;i < this.statisticsView.dateList.length;i++) {
+          let tmp = {
+            date: this.statisticsView.dateList[i],
+            totalMoney: this.statisticsView.totalMoneyList[i],
+            totalRecord: this.statisticsView.totalRecordList[i],
+            averagePrice: this.statisticsView.averagePriceList[i],
+            totalGoodsNumber: this.statisticsView.totalGoodsNumberList[i]
+          }
+          console.log(tmp)
+          this.totalList.push(tmp)
+        }
+        console.log(this.totalList)
+      },
+      getSummaries(param) {
+        const { columns, data } = param
+        const sums = []
+        columns.forEach((column, index) => {
+          if (index === 0) {
+            sums[index] = '合计'
+            return
+          }
+          if(index === 3) {
+            sums[index] = ''
+            return
+          }
+          const values = data.map(item => Number(item[column.property]))
+          if (!values.every(value => isNaN(value))) {
+            sums[index] = values.reduce((prev, curr) => {
+              const value = Number(curr)
+              if (!isNaN(value)) {
+                return prev + curr
+              } else {
+                return prev
+              }
+            }, 0)
+            if(index === 1) {
+              sums[index] += ' 元'
+            }else if(index === 2) {
+              sums[index] += ' 笔'
+            }else if(index === 4) {
+              sums[index] += ' 件'
+            }
+
+          } else {
+            sums[index] = 'N/A'
+          }
+        })
+
+        return sums
       }
     }
   }

@@ -30,6 +30,7 @@ import AdminAddMessage from '../components/admin/message/AdminAddMessage'
 import AdminSendMessageList from '../components/admin/message/AdminSendMessageList'
 import MessageList from '../components/message/MessageList'
 import MessageInfo from '../components/message/MessageInfo'
+import SystemManageStatus from '../components/admin/SystemManageStatus'
 Vue.use(Router)
 
 export default new Router({
@@ -209,6 +210,11 @@ export default new Router({
           path: '/admin/message/info',
           name: 'adminMessageInfo',
           component: MessageInfo
+        },
+        {
+          path: '/system/manage',
+          name: 'systemManageStatus',
+          component: SystemManageStatus
         }
       ]
     },

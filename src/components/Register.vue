@@ -65,7 +65,7 @@
             </el-col>
             <el-col>
               <el-form-item>
-                <el-button type="primary" @click="mailSubmit('mailRegister')">添加用户</el-button>
+                <el-button type="primary" @click="mailSubmit('mailRegister')">注册</el-button>
               </el-form-item>
             </el-col>
           </el-row>
