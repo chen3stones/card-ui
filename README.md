@@ -1,33 +1,6 @@
-# card-ui
-用户管理--前端
-
-# vue_test
-
-> test
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
+# 一卡通客户管理系统——前端
+本项目为一卡通客户管理系统前端。在本系统中，主要实现的是数据的显示、逻辑处理和数据合法性判断等。
+# 本地运行步骤
+git clone 
+npm install 
 npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
